@@ -1,19 +1,22 @@
 from django.db import models
+from django.db.models import UniqueConstraint
 
-from apps.core.models.client import Client
-from apps.core.models.doctor import Doctor
-from apps.core.models.medical_history import MedicalHistory
-
-#план лікування
+#прийоми не один
 class Appointment(models.Model):
-    id = models.AutoField(primary_key=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='appointments')
-    history = models.ForeignKey(MedicalHistory, on_delete=models.CASCADE, related_name='appointments')
-    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, related_name='appointments')
-    appointment_text = models.CharField(max_length=500)
+    id = models.BigAutoField(primary_key=True)
+    day_to_appointment = models.DateTimeField()
+    reason_for_request = models.CharField(max_length=200)
+
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='appointments')
+    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, related_name='appointments')
+    #для уникнення дублювання
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['client', 'doctor', 'day_to_appointment', 'reason_for_request'],
+                             name='unique_client_doctor')
+        ]
 
     def __str__(self):
-        return (f"id: {self.id} for patient {self.client}"
-                f"doctor: {self.doctor}"
-                f"medical history: {self.history}"
-                f"appointment: {self.appointment_text}")
+        return (f"Reception: {self.id}"
+                f"Day to reception: {self.day_to_appointment}"
+                f"Reason: {self.reason_for_request}")

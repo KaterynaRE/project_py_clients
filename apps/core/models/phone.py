@@ -6,7 +6,7 @@ class Phone(models.Model):
     phone_number = models.CharField(max_length=15)
 
     # client.phones.all()
-    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='phones')
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='phones', null=True, blank=True)
     def __str__(self):
         return (f"{self.id}"
                 f"{self.phone_number}")

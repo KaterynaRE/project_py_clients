@@ -39,11 +39,13 @@ class DoctorModelTest(TestCase):
         """Перевірка, що доктор оновлюється коректно"""
         self.doctor.surname = 'Ivanov'
         self.doctor.firstname = 'Ivan'
+        self.doctor.patronymic = 'Ivanovv'
         self.doctor.save()
 
         update_doctor = Doctor.objects.get(id=self.doctor.id)
         self.assertEqual(update_doctor.surname, 'Ivanov')
         self.assertEqual(update_doctor.firstname, 'Ivan')
+        self.assertEqual(update_doctor.patronymic, 'Ivanovv')
 
     def test_delete_doctor(self):
         """Перевірка, що доктор видаляється коректно"""

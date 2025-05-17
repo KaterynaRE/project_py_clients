@@ -5,8 +5,8 @@ class Treatment(models.Model):
     id = models.BigAutoField(primary_key=True)
     treatment_text = models.CharField(max_length=500)
 
-    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='treatments')
-    history = models.ForeignKey('MedicalHistory', on_delete=models.CASCADE, related_name='treatments')
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='treatments', null=True, blank=True)
+    history = models.ForeignKey('MedicalHistory', on_delete=models.CASCADE, related_name='treatments', null=True, blank=True)
     doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL, null=True, blank=True,related_name='treatments')
 
     def __str__(self):

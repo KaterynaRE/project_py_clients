@@ -7,8 +7,8 @@ class Appointment(models.Model):
     day_to_appointment = models.DateTimeField()
     reason_for_request = models.CharField(max_length=200)
 
-    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='appointments')
-    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, related_name='appointments')
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='appointments', null=True, blank=True)
+    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, related_name='appointments', null=True, blank=True)
     #для уникнення дублювання
     class Meta:
         constraints = [

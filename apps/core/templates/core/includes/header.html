@@ -1,0 +1,22 @@
+<header class="py-1 px-2 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'core:clients' %}" class="nav-link px-2 text-white">Clients</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Doctors</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Error</a></li>
+            </ul>
+
+            <div style="position: relative; left:12vw; " class="d-flex align-items-center ms-auto gap-2">
+                <form class="me-3" role="search">
+                    <input type="search"
+                           class="form-control form-control-dark text-bg-dark"
+                           placeholder="Search..."
+                           aria-label="Search">
+                </form>
+                <button type="button" class="btn btn-outline-light btn-sm">Login</button>
+                <button type="button" class="btn btn-warning btn-sm">Sign-up</button>
+            </div>
+        </div>
+    </div>
+</header>

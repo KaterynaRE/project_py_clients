@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <form action="{% url 'core:clients' %}" method="post" class="form-flex">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input class="form-control" type="text" name="surname" placeholder="Surname">
+    </div>
+    <div class="mb-3">
+        <input class="form-control" type="text" name="firstname" placeholder="Firstname">
+    </div>
+    <div class="mb-3">
+        <input class="form-control" type="text" name="patronymic" placeholder="Patronymic">
+    </div>
+    <div class="mb-3">
+        <input class="form-control" type="date" name="birthday">
+    </div>
+    <div class="mb-3">
+        <input class="form-control" type="text" name="email" placeholder="Email">
+    </div>
+    <div class="mb-3">
+        <select name="gender" id="gender">
+            {% for gender in gender_choices %}
+            <option value="{{gender.value}}">{{gender.label}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">💾</button>
+    </form>
+</div>

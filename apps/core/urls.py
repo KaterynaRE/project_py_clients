@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('',RedirectView.as_view(pattern_name='core:clients', permanent=True)),
     path('clients/', views.clients, name='clients'), # core:clients
+
+    path('clients/<int:pk>/',views.ClientDetailUpdateView.as_view(), name='client_detail')  # core:client_detail
 ]

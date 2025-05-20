@@ -2,14 +2,18 @@
 {% block title %}Clients{% endblock title %}
 {% block content %}
 
+
 {#line comment#}
 {% comment %} block comment {% endcomment %}
 
+<!--#винесла в окремий файл форму client_form_create.html-->
+<div style="justify-items: center;">
+    {% include "core/pages/client_form_create.html" with gender_choices=gender_choices %}
+</div>
 <div class="container-fluid">
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
         <tr>
-            <th>Id</th>
             <th scope="col">Surname</th>
             <th scope="col">Firstname</th>
             <th scope="col">Patronymic</th>
@@ -20,20 +24,19 @@
         </tr>
         </thead>
         <tbody>
+        {% for client in client_list %}
         <tr>
-            <th scope="row">{{client.id}}</th>
             <td>{{client.surname}}</td>
             <td>{{client.firstname}}</td>
             <td>{{client.patronymic}}</td>
             <td>{{client.birthday}}</td>
+            <td>{{client.get_gender_display}}</td>
             <td>{{client.email}}</td>
-            <td>{{client.gender}}</td>
             <td>
-                <a class="btn btn-sm btn-warning" >Edit</a>
-                <a class="btn btn-sm btn-info" >Details</a>
-                <a class="btn btn-sm btn-danger" >Delete</a>
+                <a href="{% url 'core:client_detail' client.id %}" class="btn btn-sm btn-info">Details</a>
             </td>
         </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>

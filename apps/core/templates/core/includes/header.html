@@ -4,7 +4,8 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="{% url 'core:clients' %}" class="nav-link px-2 text-white">Clients</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Doctors</a></li>
+                    <li><a href="{% url 'core:doctors' %}" class="nav-link px-2 text-white">Doctors</a></li>
+                    <li><a href="{% url 'core:create_client' %}" class="nav-link px-2 text-white">Add client</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Error</a></li>
                 </ul>
 
@@ -15,8 +16,16 @@
                                placeholder="Search..."
                                aria-label="Search">
                     </form>
-                    <button type="button" class="btn btn-outline-light btn-sm">Login</button>
-                    <button type="button" class="btn btn-warning btn-sm">Sign-up</button>
+                    <button type="button" class="btn btn-outline-light btn-sm">
+                        <a class="text-decoration-none" href="{% url 'login' %}">Login</a>
+                    </button>
+                     <button type="button" class="btn btn-outline-light btn-sm">
+                        <a class="text-decoration-none" href="{% url 'register' %}">Registration</a>
+                    </button>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>

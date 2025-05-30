@@ -6,10 +6,7 @@
 {#line comment#}
 {% comment %} block comment {% endcomment %}
 
-<!--#винесла в окремий файл форму client_form_create.html-->
-<div style="justify-items: center;">
-    {% include "core/pages/client_form_create.html" with gender_choices=gender_choices %}
-</div>
+<!--#винесла в окремий файл форму create_client.html-->
 <div class="container-fluid">
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -30,8 +27,8 @@
             <td>{{client.firstname}}</td>
             <td>{{client.patronymic}}</td>
             <td>{{client.birthday}}</td>
-            <td>{{client.get_gender_display}}</td>
             <td>{{client.email}}</td>
+            <td>{{client.get_gender_display}}</td>
             <td>
                 <a href="{% url 'core:client_detail' client.id %}" class="btn btn-sm btn-info">Details</a>
             </td>

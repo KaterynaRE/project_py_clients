@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.core.models import Client
+from apps.core.models import Client, Address, Doctor, Phone
 
 
 class ClientForm(forms.ModelForm):
@@ -13,5 +13,29 @@ class ClientForm(forms.ModelForm):
         exclude = ['doctors', 'address', 'created_at', 'updated_at']
         #налаштування полів
         widgets = {
+            'surname': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Surname'}),
             'birthday': forms.DateInput(attrs={'type':'date', 'class':'form-control'}, format='%Y-%m-%d')
         }
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at']
+
+
+class DoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at']
+        widgets = {
+            'surname': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Surname'}),
+        }
+
+
+class PhoneForm(forms.ModelForm):
+    class Meta:
+        model = Phone
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at', 'client']

@@ -4,13 +4,22 @@
     <mappings />
     <preferences />
   </component>
+  <component name="DBNavigator.Project.DataEditorManager">
+    <record-view-column-sorting-type value="BY_INDEX" />
+    <value-preview-text-wrapping value="false" />
+    <value-preview-pinned value="false" />
+  </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
-    <assistants />
+    <assistants>
+      <assistant-state connection-id="c23b462c-5884-493c-ba94-9935b8c85f4b" default-profile-name="" selected-profile-name="" selected-model-name="" assistant-type="GENERIC" selected-action="SHOW_SQL" availability="UNAVAILABLE" acknowledgement="NONE">
+        <messages />
+      </assistant-state>
+    </assistants>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
@@ -24,8 +33,25 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="c23b462c-5884-493c-ba94-9935b8c85f4b" />
+  </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="c23b462c-5884-493c-ba94-9935b8c85f4b" dataset="main.core_address" active-filter-id="" />
+    <filter-actions connection-id="c23b462c-5884-493c-ba94-9935b8c85f4b" dataset="main.core_client" active-filter-id="71d190d1-98a9-485e-9986-f39aa5a541e9">
+      <filter id="71d190d1-98a9-485e-9986-f39aa5a541e9" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="c23b462c-5884-493c-ba94-9935b8c85f4b" dataset="main.core_doctor" active-filter-id="782edf3e-75f4-4a67-9ea5-52785ae93dc9">
+      <filter id="782edf3e-75f4-4a67-9ea5-52785ae93dc9" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="1" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="c23b462c-5884-493c-ba94-9935b8c85f4b" dataset="main.core_address" active-filter-id="b6c41b65-1fa7-4b5a-8905-68d106f9185c">
+      <filter id="b6c41b65-1fa7-4b5a-8905-68d106f9185c" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="id" operator="=" value="1" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />

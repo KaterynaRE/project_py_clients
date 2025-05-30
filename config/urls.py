@@ -23,9 +23,10 @@ urlpatterns = [
     # http://localhost:8000/admin/
     path('admin/', admin.site.urls),
     # http://localhost:8000/
-    path('', include('apps.core.urls'))
+    path('', include('apps.core.urls')),
+    path('accounts/', include('apps.users.urls')),
 ]
 
 # #!!!Media
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,19 +1,84 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Client Detail{% endblock title %}
 {% block content %}
 
+<div id="popup" class="alert alert-success"
+     style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+</div>
 <div class="container-fluid">
-    <form method="post">
+    <h3>Client</h3>
+    <form method="post" class="form-center">
         <table>
             {% csrf_token %}
             {{client_form.as_table}}
             <tr>
                 <th>Зберегти</th>
-                <td><button type="submit" name="submit_client">💾</button></td>
+                <td>
+                    <button type="submit" name="submit_client">💾</button>
+                    <button type="submit" name="submit_delete_client" >❌ Delete</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="container-fluid">
+    <h3>Address</h3>
+    <form method="post" class="form-center" id="address-form"
+          data-url="{% url 'core:address_form' pk=client.id %}"
+          data-url-delete="{% url 'core:address_delete' pk=client.id %}">
+        <table>
+            {% csrf_token %}
+            {{address_form.as_table}}
+            <tr>
+                <th id="address-response" style="color: green">options</th>
+                <td>
+                    <button type="submit" id="submit_address" name="submit_address">💾 Save</button>
+                    <button type="button" id="address_delete_btn" name="address_delete_btn" >❌ Delete</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="container-fluid">
+    <h3>Phone</h3>
+    {% for phone_form in phone_form_list %}
+    <form method="post" class="form-center">
+        <table>
+            {% csrf_token %}
+            {{ phone_form.as_table }}
+            <tr>
+                <th>options</th>
+                <td>
+                    <button type="submit" name="submit_phone_update" value="{{ forloop.counter0 }}">💾 Update</button>
+                    <button type="submit" name="submit_phone_delete" value="{{ forloop.counter0 }}">❌ Delete</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    {% endfor %}
+
+    <h5>Add new phone</h5>
+    <form method="post" class="form-center" id="phone-form"
+          data-url="{% url 'core:phone_form' pk=client.id %}">
+        <table>
+            {% csrf_token %}
+            {{ phone_form.as_table }}
+            <tr>
+                <th>Save</th>
+                <td>
+                    <button type="submit" name="submit_phone_add">💾 Add</button>
+                </td>
             </tr>
         </table>
     </form>
 </div>
 
 
+
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'core/js/client_detail.js' %}"></script>
+<script src="{% static 'core/js/client_detail_phone.js' %}"></script>
+{% endblock scripts %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Appointments{% endblock title %}
+{% block content %}
+
+<div class="container-fluid">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">day to appointment</th>
+            <th scope="col">reason for request</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for appointment in appointment_list %}
+        <tr>
+            <td>{{appointment.day_to_appointment}}</td>
+            <td>{{appointment.reason_for_request}}</td>
+<!--            <td>-->
+<!--                <a href="{% url 'core:appointment_detail' appointment.id %}" class="btn btn-sm btn-info">Details</a>-->
+<!--            </td>-->
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

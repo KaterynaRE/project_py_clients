@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Welcome{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<style>
+    .blur-bg{
+     position: fixed;
+     top: 0;
+     width: 100vw;
+     height: 100vh;
+     backdrop-filter: blur(8px);
+     background: rgba(0, 0, 0, 0.3);
+    z-index: 1050;
+    }
+</style>
+
+<div class="blur-bg d-flex justify-content-center align-items-center">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+            <div class="modal-body">
+                <a class="btn btn-outline-light btn-lg m-2" href="{% url 'register' %}">Register</a>
+                <a class="btn btn-outline-light btn-lg m-2" href="{% url 'login' %}">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Qualifications{% endblock title %}
+{% block content %}
+
+<div style="justify-items: center;">
+    {% include "core/pages/qualification_form_create.html" %}
+</div>
+
+<div class="container-fluid">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Qualification</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for qualification in qualification_list %}
+        <tr>
+            <td>{{qualification.qualification_name}}</td>
+            <td>
+                <a href="{% url 'core:qualification_detail' qualification.id %}" class="btn btn-sm btn-info">Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

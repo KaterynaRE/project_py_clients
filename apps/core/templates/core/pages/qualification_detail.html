@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Qualification Detail{% endblock title %}
+{% block content %}
+
+<div id="popup" class="alert alert-success"
+     style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+</div>
+<div class="container-fluid">
+    <h3>Qualification</h3>
+    <form method="post" class="form-center">
+        <table>
+            {% csrf_token %}
+            {{qualification_form.as_table}}
+            <tr>
+                <th>Save</th>
+                <td>
+                    <button type="submit" name="update_qualification">💾</button>
+                    <button type="submit" name="submit_qualification_delete" >❌</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock content %}

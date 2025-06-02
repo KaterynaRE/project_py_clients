@@ -2,13 +2,34 @@
     <nav>
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
+                {% if user.is_authenticated %}
+                {% if user.role == 'admin' %}
                 <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="{% url 'core:clients' %}" class="nav-link px-2 text-white">Clients</a></li>
                     <li><a href="{% url 'core:doctors' %}" class="nav-link px-2 text-white">Doctors</a></li>
+                    <li><a href="{% url 'core:qualifications' %}" class="nav-link px-2 text-white">Qualifications</a>
+                    </li>
                     <li><a href="{% url 'core:create_client' %}" class="nav-link px-2 text-white">Add client</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Error</a></li>
+                    <li><a href="{% url 'core:appointments' %}" class="nav-link px-2 text-white">Appointment</a></li>
+                    <li><a href="{% url 'users' %}" class="nav-link px-2 text-white">Users</a></li>
+                    <li><a href="{% url 'core:about_core' %}" class="nav-link px-2 text-white">About</a></li>
                 </ul>
-
+                {% elif user.role == 'user' %}
+                <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="{% url 'core:clients' %}" class="nav-link px-2 text-white">Clients</a></li>
+                    <li><a href="{% url 'core:doctors' %}" class="nav-link px-2 text-white">Doctors</a></li>
+                    <li><a href="{% url 'core:qualifications' %}" class="nav-link px-2 text-white">Qualifications</a>
+                    </li>
+                    <li><a href="{% url 'core:create_client' %}" class="nav-link px-2 text-white">Add client</a></li>
+                    <li><a href="{% url 'core:appointments' %}" class="nav-link px-2 text-white">Appointment</a></li>
+                    <li><a href="{% url 'core:about_core' %}" class="nav-link px-2 text-white">About</a></li>
+                </ul>
+                {% elif user.role == 'guest' %}
+                <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="{% url 'core:about_core' %}" class="nav-link px-2 text-white">About</a></li>
+                </ul>
+                {% endif %}
+                {% endif %}
                 <div style="position: relative; left:12vw; " class="d-flex align-items-center ms-auto gap-2">
                     <form class="me-3" role="search">
                         <input type="search"
@@ -16,16 +37,16 @@
                                placeholder="Search..."
                                aria-label="Search">
                     </form>
-                    <button type="button" class="btn btn-outline-light btn-sm">
-                        <a class="text-decoration-none" href="{% url 'login' %}">Login</a>
-                    </button>
-                     <button type="button" class="btn btn-outline-light btn-sm">
-                        <a class="text-decoration-none" href="{% url 'register' %}">Registration</a>
-                    </button>
+                    {% if user.is_authenticated %}
                     <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
-                         <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                        <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
                     </form>
+                    <a class="text-decoration-none btn btn-outline-light btn-sm" href="{% url 'register' %}">Registration</a>
+                    {% else %}
+                    <a class="btn btn-outline-light btn-sm text-decoration-none" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-outline-light btn-sm text-decoration-none" href="{% url 'register' %}">Registration</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

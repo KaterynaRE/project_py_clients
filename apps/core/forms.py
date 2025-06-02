@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.core.models import Client, Address, Doctor, Phone
+from apps.core.models import Client, Address, Doctor, Phone, Qualification, Appointment
 
 
 class ClientForm(forms.ModelForm):
@@ -33,9 +33,21 @@ class DoctorForm(forms.ModelForm):
             'surname': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Surname'}),
         }
 
+class QualificationForm(forms.ModelForm):
+    class Meta:
+        model = Qualification
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at', 'doctor']
+
 
 class PhoneForm(forms.ModelForm):
     class Meta:
         model = Phone
         fields = '__all__'
         exclude = ['created_at', 'updated_at', 'client']
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at', 'client', 'doctor']

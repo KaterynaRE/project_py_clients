@@ -3,43 +3,52 @@
 {% block content %}
 
 <div class="container-fluid text-center my-3">
-    {% if doctor.photo %}
-    <img style="width: 200px; height: 200px;" src="{{doctor.photo.url}}" alt="">
-    {% endif %}
-</div>
-
-<div class="container-fluid text-left">
-    <h3>Doctor</h3>
-    <form method="post" class="form-center" enctype="multipart/form-data">
-        <table>
+    <div class="d-flex justify-content-center align-items-center" style="gap: 10px;">
+        <form method="post" style="display: flex; gap: 10px; align-items: center;">
             {% csrf_token %}
-            {{doctor_form.as_table}}
-            <tr>
-                <th>Зберегти</th>
-                <td>
-                    <button type="submit" name="submit_doctor">💾</button>
-                </td>
-            </tr>
-        </table>
-        <table>
-            {% csrf_token %}
-            {{qualification_form.as_table}}
-            <tr>
-                <th>Зберегти</th>
-                <td>
-                    <button type="submit" name="submit_qualification">💾</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-<!--    <h4>qualification</h4>-->
-<!--    <ul>-->
-<!--        {% for form in qualification_list_form %}-->
-<!--        <li>{{ form.qualification_name.value }}</li>-->
-<!--        {% empty %}-->
-<!--        <li>Dont qualification</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
-</div>
+            {{ add_qualification_form.qualification }}
+            <button type="submit" name="submit_qualification">💾</button>
+        </form>
+    </div>
 
+    <div class="container-fluid text-center my-3">
+        {% if doctor.photo %}
+        <img style="width: 200px; height: 200px;" src="{{doctor.photo.url}}" alt="">
+        {% endif %}
+    </div>
+    <div class="container-fluid text-left">
+        <h3 class="text-center">Doctor</h3>
+        <form method="post" class="form-center" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{doctor_form.as_table}}
+                <tr>
+                    <th>Qualifications</th>
+                    <td colspan="2">
+                        <ul style="list-style-type: none;">
+                            {% for form in qualification_list_form %}
+                            <li>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ form.qualification_name }}
+                                    <input type="hidden" name="qualification_id" value="{{ form.instance.id }}">
+                                    <button type="submit" name="submit_delete_qualification">🗑️</button>
+                                </form>
+                            </li>
+                            {% empty %}
+                            <li>Don`t qualification</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <button type="submit" name="submit_doctor">💾</button>
+                        <button type="submit" name="delete_doctor">🗑️</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
 {% endblock content %}

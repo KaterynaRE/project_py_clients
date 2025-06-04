@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
-from apps.core.forms import ClientForm, AddressForm, DoctorForm, PhoneForm, QualificationForm, AppointmentForm
+from apps.core.forms import ClientForm, AddressForm, DoctorForm, PhoneForm, QualificationForm, AppointmentForm, \
+    AddQualificationForm
 from apps.core.models import Client, Doctor, Qualification, Appointment
 from apps.core.models.client import Gender
 
@@ -133,25 +134,26 @@ class QualificationDetailUpdateView(views.View):
         return render(request, 'core/pages/qualification_detail.html', context)
 
 
+
 class DoctorDetailUpdateView(views.View):
     def get(self, request, pk):
         doctor = get_object_or_404(Doctor, pk=pk)
-       #qualification_list = doctor.qualifications.all()
         print(doctor)
         doctor_form = DoctorForm(instance=doctor, prefix='doctor')
-        #qualification_list_form = [QualificationForm(instance=qualification, prefix=str(i)) for i, qualification in enumerate(qualification_list)]
-        #qualification_form = QualificationForm(prefix='qualification_name')
+        qualification_list_form = [QualificationForm(instance=qualification, prefix=str(i)) for i, qualification in enumerate(doctor.qualifications.all())]
+        add_qualification_form = AddQualificationForm()
         context = {
             'doctor_form' : doctor_form,
             'doctor': doctor,
-            # 'qualification_list_form': qualification_list_form,
-            # 'qualification_form': qualification_form,
+            'add_qualification_form': add_qualification_form,
+            'qualification_list_form': qualification_list_form,
         }
         return render(request, 'core/pages/doctor_detail.html', context)
 
     def post(self, request, pk):
         doctor = get_object_or_404(Doctor, pk=pk)
         doctor_form = DoctorForm(request.POST, request.FILES,instance=doctor, prefix='doctor')
+        add_qualification_form = AddQualificationForm(request.POST)
 
         if 'submit_doctor' in request.POST:
             if doctor_form.is_valid():
@@ -159,22 +161,33 @@ class DoctorDetailUpdateView(views.View):
                 return redirect('core:doctor_detail', pk=doctor.pk)
             else:
                 print(doctor_form.errors)
-        # elif 'submit_qualification' in request.POST:
-        #     qualification_form = QualificationForm(request.POST, prefix='qualification_name')
-        #     if qualification_form.is_valid():
-        #         qualification = qualification_form.save(commit=False)
-        #         qualification.doctor = doctor
-        #         qualification.save()
-        #         return redirect('core:doctor_detail', pk=doctor.pk)
-        #     else:
-        #         print(qualification_form.errors)
-        # qualification_list = doctor.qualifications.all()
-        # qualification_list_form = [QualificationForm(instance=qualification, prefix=str(i)) for i, qualification in enumerate(qualification_list)]
+        elif 'delete_doctor' in request.POST:
+            if doctor_form.is_valid():
+                doctor.delete()
+                return redirect('core:doctors')
+            else:
+                print(doctor_form.errors)
+
+        elif 'submit_qualification' in request.POST:
+            if add_qualification_form.is_valid():
+                qualification = add_qualification_form.cleaned_data['qualification']
+                qualification.doctor = doctor
+                qualification.save()
+                return redirect('core:doctor_detail', pk=doctor.pk)
+            else:
+                print(add_qualification_form.errors)
+        elif 'submit_delete_qualification' in request.POST:
+            qualification_id = request.POST.get('qualification_id')
+            qualification = get_object_or_404(Qualification, pk=qualification_id)
+            doctor.qualifications.remove(qualification)
+            return redirect('core:doctor_detail', pk=doctor.pk)
+
+        qualification_list_form = [QualificationForm(instance=q, prefix=str(i)) for i, q in enumerate(doctor.qualifications.all())]
         context = {
             'doctor_form': doctor_form,
             'doctor': doctor,
-            # 'qualification_list_form': qualification_list_form,
-            # 'qualification_list': qualification_list,
+            'add_qualification_form': add_qualification_form,
+            'qualification_list_form': qualification_list_form,
         }
         return render(request, 'core/pages/doctor_detail.html', context)
 

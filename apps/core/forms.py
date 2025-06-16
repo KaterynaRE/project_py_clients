@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.core.models import Client, Address, Doctor, Phone, Qualification, Appointment
+from apps.core.models import Client, Address, Doctor, Phone, Qualification, Appointment, MedicalHistory, Treatment
 
 
 class ClientForm(forms.ModelForm):
@@ -61,3 +61,37 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = '__all__'
         exclude = ['created_at', 'updated_at', 'client', 'doctor']
+
+class AddClientForm(forms.Form):
+    client = forms.ModelChoiceField(
+        queryset=Client.objects.all(),
+        empty_label="Select client",
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+
+class AddDoctorForm(forms.Form):
+    doctor = forms.ModelChoiceField(
+        queryset=Doctor.objects.all(),
+        empty_label="Select doctor",
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+
+
+class MedicalHistoryForm(forms.ModelForm):
+    class Meta:
+        model = MedicalHistory
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at', 'client', 'doctor']
+        widgets = {
+            'diagnostic_date': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            })
+        }
+
+class TreatmentForm(forms.ModelForm):
+    class Meta:
+        model = Treatment
+        fields = '__all__'
+        exclude = ['created_at', 'updated_at', 'client', 'doctor', 'history']
+

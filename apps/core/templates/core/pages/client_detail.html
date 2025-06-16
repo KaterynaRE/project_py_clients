@@ -3,8 +3,12 @@
 {% block title %}Client Detail{% endblock title %}
 {% block content %}
 
-<div id="popup" class="alert alert-success"
-     style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+<div class="d-flex justify-content-center align-items-center" style="gap: 10px;">
+    <form method="post" style="display: flex; gap: 10px; align-items: center;">
+        {% csrf_token %}
+        {{ add_doctor_form.as_p }}
+        <button type="submit" name="add_doctor">💾</button>
+    </form>
 </div>
 <div class="container-fluid">
     <h3>Client</h3>
@@ -16,7 +20,7 @@
                 <th>Зберегти</th>
                 <td>
                     <button type="submit" name="submit_client">💾</button>
-                    <button type="submit" name="submit_delete_client" >❌ Delete</button>
+                    <button type="submit" name="submit_delete_client">❌ Delete</button>
                 </td>
             </tr>
         </table>
@@ -34,7 +38,7 @@
                 <th id="address-response" style="color: green">options</th>
                 <td>
                     <button type="submit" id="submit_address" name="submit_address">💾 Save</button>
-                    <button type="button" id="address_delete_btn" name="address_delete_btn" >❌ Delete</button>
+                    <button type="button" id="address_delete_btn" name="address_delete_btn">❌ Delete</button>
                 </td>
             </tr>
         </table>
@@ -57,7 +61,6 @@
         </table>
     </form>
     {% endfor %}
-
     <h5>Add new phone</h5>
     <form method="post" class="form-center" id="phone-form"
           data-url="{% url 'core:phone_form' pk=client.id %}">
@@ -73,7 +76,44 @@
         </table>
     </form>
 </div>
-
+<div class="container-fluid">
+    <h3>Medical History</h3>
+    <form method="post" class="form-center" id="medical_history_form">
+        <table>
+            {% csrf_token %}
+            {{medical_history_form.as_table}}
+            <tr>
+                <th id="medical-history-response" style="color: green">options</th>
+                <td>
+                    <button type="submit" id="submit_medical_history" name="submit_medical_history">💾 Save</button>
+                    <button type="button" id="medical_history_delete_btn" name="medical_history_delete_btn">❌ Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="container-fluid">
+    <h3>Doctor</h3>
+    <form method="post" class="form-center" id="add_doctor_form">
+        <table>
+            {% csrf_token %}
+            {% if doctors %}
+            {% for doctor in doctors %}
+            <tr>
+                <th>Doctor:</th>
+                <td class="d-flex  justify-content-center align-items-center">S: <strong>{{doctor.surname}}</strong> F:
+                    <strong>{{doctor.firstname}}</strong>
+                    <div>
+                        <button class="btn btn-sm" type="submit" name="delete_doctor" value="{{ doctor.id }}">❌</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </form>
+</div>
 
 
 {% endblock content %}

@@ -11,6 +11,8 @@
                     </li>
                     <li><a href="{% url 'core:create_client' %}" class="nav-link px-2 text-white">Add client</a></li>
                     <li><a href="{% url 'core:appointments' %}" class="nav-link px-2 text-white">Appointment</a></li>
+                    <li><a href="{% url 'core:medical_history' %}" class="nav-link px-2 text-white">Medical history</a></li>
+                    <li><a href="{% url 'core:treatment' %}" class="nav-link px-2 text-white">Treatment</a></li>
                     <li><a href="{% url 'users' %}" class="nav-link px-2 text-white">Users</a></li>
                     <li><a href="{% url 'core:about_core' %}" class="nav-link px-2 text-white">About</a></li>
                 </ul>
@@ -22,6 +24,8 @@
                     </li>
                     <li><a href="{% url 'core:create_client' %}" class="nav-link px-2 text-white">Add client</a></li>
                     <li><a href="{% url 'core:appointments' %}" class="nav-link px-2 text-white">Appointment</a></li>
+                    <li><a href="{% url 'core:medical_history' %}" class="nav-link px-2 text-white">Medical history</a></li>
+                    <li><a href="{% url 'core:treatment' %}" class="nav-link px-2 text-white">Treatment</a></li>
                     <li><a href="{% url 'core:about_core' %}" class="nav-link px-2 text-white">About</a></li>
                 </ul>
                 {% elif user.role == 'guest' %}

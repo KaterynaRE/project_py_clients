@@ -1,0 +1,13 @@
+<div class="container mt-5">
+    <form action="{% url 'core:appointments' %}" method="post" class="form-flex">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Day to appointment</label>
+            <input class="form-control" type="date" name="day_to_appointment">
+        </div>
+        <div class="mb-3">
+            <input class="form-control" type="text" name="reason_for_request" placeholder="reason_for_request">
+        </div>
+        <button type="submit">💾</button>
+    </form>
+</div>

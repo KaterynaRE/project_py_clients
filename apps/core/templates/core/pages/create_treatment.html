@@ -1,0 +1,9 @@
+<div class="container mt-5">
+    <form action="{% url 'core:treatment' %}" method="post" class="form-flex">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input class="form-control" type="text" name="treatment_text" placeholder="treatment_text">
+        </div>
+        <button type="submit">💾</button>
+    </form>
+</div>

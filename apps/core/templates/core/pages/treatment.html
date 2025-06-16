@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Treatment{% endblock title %}
+{% block content %}
+
+<div style="justify-items: center;">
+    {% include "core/pages/create_treatment.html" %}
+</div>
+<div class="container-fluid">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">treatment text</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for treatment in treatment_list %}
+        <tr>
+            <td>{{treatment.treatment_text}}</td>
+            <td>
+                <a href="{% url 'core:treatment_detail' treatment.id %}" class="btn btn-sm btn-info">Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

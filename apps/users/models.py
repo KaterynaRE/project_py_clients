@@ -9,4 +9,4 @@ class CustomUser(AbstractUser):
         ('admin', 'Admin'),
     ]
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='admin')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='guest')

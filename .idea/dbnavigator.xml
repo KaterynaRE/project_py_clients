@@ -50,11 +50,20 @@
     <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.users_customuser_groups" active-filter-id="dfa00087-abc0-40db-a592-e64ec2111cea">
       <filter id="dfa00087-abc0-40db-a592-e64ec2111cea" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.core_appointment" active-filter-id="537f677a-9d92-48b0-b45d-e8f816e85dd7">
+      <filter id="537f677a-9d92-48b0-b45d-e8f816e85dd7" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.users_customuser" active-filter-id="08f19647-bee7-4c9e-ba95-478a2ebedd15">
       <filter id="08f19647-bee7-4c9e-ba95-478a2ebedd15" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.core_medicalhistory" active-filter-id="e5d43a35-91be-43ad-a406-84f0ce8064f0">
+      <filter id="e5d43a35-91be-43ad-a406-84f0ce8064f0" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.core_client" active-filter-id="3be6284d-20d7-472e-9dd7-dd020ce77000">
       <filter id="3be6284d-20d7-472e-9dd7-dd020ce77000" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="85a91ea3-b0f1-4f2a-9cb0-2b4eb754221a" dataset="main.core_client_doctors" active-filter-id="683fb568-9669-4066-a95a-4bebe147ce51">
+      <filter id="683fb568-9669-4066-a95a-4bebe147ce51" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">

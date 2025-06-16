@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Medical History all patient{% endblock title %}
+{% block content %}
+
+<div style="justify-items: center;">
+    {% include "core/pages/create_medical_history.html" %}
+</div>
+<div class="container-fluid">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">name of disease</th>
+            <th scope="col">diagnostic date</th>
+            <th scope="col">is chronic</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for history in medical_history_list %}
+        <tr>
+            <td>{{history.name_of_disease}}</td>
+            <td>{{history.diagnostic_date}}</td>
+            <td>{{history.is_chronic}}</td>
+            <td>
+                <a href="{% url 'core:medical_history_detail' history.id %}" class="btn btn-sm btn-info">Details</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

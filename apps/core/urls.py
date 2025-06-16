@@ -15,11 +15,18 @@ urlpatterns = [
     path('about/core/', about_core, name='about_core'),
 
     path('welcome/', views.welcome, name='welcome'),
+    path('treatment/', views.treatment, name='treatment'),
+    path('treatment/<int:pk>/', views.TreatmentDetailUpdateView.as_view(), name='treatment_detail'),
+
     path('appointments/', views.appointments, name='appointments'),
+    path('appointments/<int:pk>/', views.AppointmentsDetailUpdateView.as_view(), name='appointments_detail'),
+
+    path('medical_history/', views.medical_history, name='medical_history'),
+    path('medical_history/<int:pk>/', views.MedicalHistoryDetailUpdateView.as_view(), name='medical_history_detail'),
 
     # path('', RedirectView.as_view(pattern_name='core:clients', permanent=True)),
     path('', RedirectView.as_view(pattern_name='core:clients', permanent=False), name='home'),
-    path('clients/', views.clients, name='clients'), # core:clients
+    path('clients/', views.clients, name='clients'),  # core:clients
     path('clients/create/', views.create_client, name='create_client'),
 
     path('clients/<int:pk>/', views.ClientDetailUpdateView.as_view(), name='client_detail'),  # core:client_detail
